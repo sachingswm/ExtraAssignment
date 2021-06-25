@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge" />-->
+    <title>Title</title>
+
+    <link th:href="@{/css/form.css}" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="#" th:action="@{/updateEditedUserDetails}"  th:object="${userDetailsAndSkills}" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" name="oldEmail" th:value="${userDetailsAndSkills.email}" required/>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required th:value="${userDetailsAndSkills.name}" class="form-control" placeholder="Enter Name"/>
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" th:value="${userDetailsAndSkills.email}" required type="email" placeholder="Enter Email"/>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="text" required th:value="${userDetailsAndSkills.phone}" placeholder="Enter Phone"/>
+                <p class="alert alert-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" />
+
+            </div>
+
+            <div class="form-group">
+                <label for="state">State</label>
+                <input id="state" name="state" type="text" required th:value="${userDetailsAndSkills.state}" placeholder="Enter State"/>
+            </div>
+
+
+            <div class="form-group">
+                <p>Gender</p>
+
+                <div class="form-check">
+
+                    <input th:each="currgender: ${gendersList}" type="radio" th:field="*{gender}" th:value="${currgender.genderType}"
+                         required  th:text="${currgender.genderType}" th:checked="${currgender.genderType==userDetailsAndSkills.gender}" />
+
+                </div>
+
+            </div>
+
+                <div class="form-group">
+                    <p>Skills</p>
+                    <select name="skills" class="form-select"  aria-label="Default select example"
+                             required multiple="multiple" th:field="*{skills}">
+                        <option th:each="currskill : ${skillsList}" th:value="${currskill}"
+                                 th:text="${currskill}" th:selected="${#lists.contains(userDetailsAndSkills.skills,currskill)}"/>
+                    </select>
+
+                </div>
+
+            <div class="form-group">
+                <img th:src="${userDetailsAndSkills.photos}" class="img-rounded">
+                <!--<img th:src="${image}"/>-->
+                <label class="form-label" for="customFile">Photo</label>
+                <input  required name="updateimage" type="file"  class="form-control" id="customFile" accept="image/png, image/jpeg"/>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+
+    </div>
+
+
+</body>
+</html>

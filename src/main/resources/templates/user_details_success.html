@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link th:href="@{/css/form.css}" rel="stylesheet">
+</head>
+<body>
+    <h1>Name</h1>
+    <h2 th:text="${userDetailsAndSkills.name}"></h2>
+    <br>
+    <h1>Email</h1>
+    <h2 th:text="${userDetailsAndSkills.email}"></h2>
+    <br>
+    <h1>Phone</h1>
+    <h2 th:text="${userDetailsAndSkills.phone}"></h2>
+    <br>
+    <h1>State</h1>
+    <h2 th:text="${userDetailsAndSkills.state}"></h2>
+    <br>
+    <h1>Gender</h1>
+    <h2 th:text="${userDetailsAndSkills.gender}"></h2>
+    <br>
+    <h1>Skills</h1>
+    <h2 th:text="${userDetailsAndSkills.skills}"></h2>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <img class="thumbnail img-responsive" th:src="${userDetailsAndSkills.photos}" />
+        </div>
+    </div>
+
+    <a th:href="@{/updateUser/{email}(email=${userDetailsAndSkills.email})}" class="btn btn-primary">Update</a>
+    <a th:href="@{/}" class="btn btn-primary">New User</a>
+
+</body>
+</html>
